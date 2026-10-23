@@ -1,0 +1,116 @@
+name: Add or update product (no code)
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Add a new product or update an existing ID?
+        type: choice
+        required: true
+        options: [add, update]
+      product_id:
+        description: Unique lowercase ID (e.g. braided-cable). Auto-created from name for add if blank.
+        type: string
+      name:
+        description: Product name (required for add; blank keeps current name)
+        type: string
+      category:
+        description: Category (required for add; blank keeps current category)
+        type: string
+      price:
+        description: Price in BDT, numbers only (required for add; blank keeps current price)
+        type: string
+      original_price:
+        description: Original price in BDT; blank keeps current, 'none' clears
+        type: string
+      image_path:
+        description: Path e.g. assets/images/products/charger.jpg (upload image first)
+        type: string
+      description:
+        description: Short product description (blank keeps current)
+        type: string
+      stock_status:
+        description: Stock status (new items default to out-of-stock)
+        type: choice
+        options: [keep, in-stock, out-of-stock]
+      badges:
+        description: featured, new, featured,new, none (blank keeps existing)
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: product-management
+  cancel-in-progress: false
+
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Create or edit product from form
+        env:
+          FIELD_OPERATION: ${{ inputs.operation }}
+          FIELD_ID: ${{ inputs.product_id }}
+          FIELD_NAME: ${{ inputs.name }}
+          FIELD_CATEGORY: ${{ inputs.category }}
+          FIELD_PRICE: ${{ inputs.price }}
+          FIELD_ORIGINAL_PRICE: ${{ inputs.original_price }}
+          FIELD_IMAGE_PATH: ${{ inputs.image_path }}
+          FIELD_DESCRIPTION: ${{ inputs.description }}
+          FIELD_STOCK_STATUS: ${{ inputs.stock_status }}
+          FIELD_BADGES: ${{ inputs.badges }}
+        run: python3 scripts/manage_product.py
+      - name: Commit product catalog update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/products.json
+          if git diff --cached --quiet; then
+            echo "No product changes needed."
+          else
+            git commit -m "Catalog: manage product via Actions form"
+            git push origin HEAD:main
+          fi
+  # GITHUB_TOKEN pushes do not trigger the push workflow. Deploy here as well.
+  build:
+    runs-on: ubuntu-latest
+    needs: edit
+    steps:
+      - name: Checkout updated main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Validate catalog
+        run: python3 scripts/validate.py
+      - name: Test cart and checkout logic
+        run: node --test tests/*.test.mjs
+      - name: Build website
+        run: python3 scripts/build.py
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Publish edited catalog
+        id: deployment
+        uses: actions/deploy-pages@v4
