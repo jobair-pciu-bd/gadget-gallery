@@ -1,5 +1,7 @@
 # Gadget Gallery — website owner guide
 
+**বাংলায় ওয়েবসাইট পরিচালনার নির্দেশিকা:** [Gadget Gallery Bengali Owner Guide](OWNER_GUIDE_BN.md) — পণ্যের দাম, ছবি, স্টক ও WhatsApp পরিবর্তনের ধাপগুলো এখানে পাবেন।
+
 **Gadget Gallery** · *Smart Gadgets. Smart Choice.*  
 Mobile accessories • Bangladesh • ৳ BDT
 
