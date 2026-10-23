@@ -9,10 +9,10 @@ A professional, fully static website with no hosting bill, no database, no termi
 
 ## 1. Website, repository and setup
 
-This project is prepared for the GitHub repository **`jobair-pciu-bd/website`**.
+This project is prepared for the GitHub repository **`jobair-pciu-bd/gadget-gallery`**.
 
-- **Website once GitHub Pages is enabled and deployment succeeds:** `https://jobair-pciu-bd.github.io/website/`
-- **Repository:** `https://github.com/jobair-pciu-bd/website`
+- **Website once GitHub Pages is enabled and deployment succeeds:** `https://jobair-pciu-bd.github.io/gadget-gallery/`
+- **Repository:** `https://github.com/jobair-pciu-bd/gadget-gallery`
 - **Deployment status:** Repository → **Actions** → **Deploy Gadget Gallery to GitHub Pages**.
 - **Editable product file:** `data/products.json`
 - **Editable business settings:** `data/settings.json`
@@ -177,7 +177,7 @@ scripts/manage_product.py        ← GitHub Actions add/update form
 .github/workflows/deploy.yml     ← auto/manual site publishing
 .github/workflows/manage-product.yml ← browser-based product manager + publish
 tests/store.test.mjs             ← nine automated checks
-archive/previous-index.html     ← old test page preserved from original repo
+archive/previous-index.html     ← archived example test page
 ```
 
 Source files do not need a JavaScript framework, Node build packages or paid tools. Python and Node are already supplied by GitHub Actions runners; you never need to install them.
