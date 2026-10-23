@@ -1,0 +1,42 @@
+{
+  "business_name": "Gadget Gallery",
+  "tagline": "Smart Gadgets. Smart Choice.",
+  "currency": "BDT",
+  "whatsapp_number": "",
+  "facebook_page_url": "",
+  "contact_email": "",
+  "service_area": "Bangladesh — coverage to be confirmed",
+  "business_address": "Online store — address to be added",
+  "promo_message": "Everyday tech essentials, thoughtfully selected.",
+  "announcement": "New store preview • Products and prices are examples only",
+  "delivery": {
+    "summary": "Delivery charges, timing, and service availability will be confirmed before your order is accepted.",
+    "details": [
+      "Add your delivery locations, estimated times, and fees here before launch.",
+      "The cart displays product subtotal only; delivery fees are not included.",
+      "An order enquiry on WhatsApp is not a confirmed purchase."
+    ]
+  },
+  "returns": {
+    "summary": "Return, replacement, and refund terms have not yet been published.",
+    "details": [
+      "Add eligibility, time limits, exclusions, and return shipping responsibilities before accepting live orders.",
+      "Customers should contact the store to discuss any product issue before sending an item back.",
+      "This page is an editable placeholder, not a return or refund guarantee."
+    ]
+  },
+  "privacy": {
+    "summary": "This is a starter privacy notice. Review it for your business before going live.",
+    "details": [
+      "The cart is saved in your browser's local storage. This static website does not operate a customer database.",
+      "When you choose to place an order, the details you enter are included in a WhatsApp message for you to review and send.",
+      "You may contact the store to ask how order information is handled. Add retention and contact details before launch."
+    ]
+  },
+  "faq": [
+    {"question": "How do I order?", "answer": "Add items to the cart, enter your delivery details, and open the pre-filled WhatsApp message. You must send the message to request the order."},
+    {"question": "Are the displayed items available?", "answer": "This site currently contains example products. Check price, availability, and specifications with the store before buying."},
+    {"question": "Is online payment available?", "answer": "No online payment is collected on this website. Payment options must be confirmed directly with the store."},
+    {"question": "How much is delivery?", "answer": "Delivery cost and coverage will be confirmed by the store; the cart total excludes delivery fees."}
+  ]
+}
